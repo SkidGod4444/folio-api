@@ -1,6 +1,6 @@
 import { child, get, ref, set } from "firebase/database";
 import { FBdb } from "../init/firebase";
-import { BlogT, ChatT, ContentT, MsgT, ProjectT, UserT } from "../types";
+import { BlogT, ChatT, ContentT, LabelT, MsgT, ProjectT, StackT, UserT } from "../types";
 
 async function CreateUser({ id, name, email, pfp }: UserT) {
   set(ref(FBdb, "users/" + id), {
@@ -252,6 +252,71 @@ async function UpdateChat(id: string, data: ChatT) {
   }
 }
 
+//////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
+
+async function CreateStack({id, name}: StackT) {
+  set(ref(FBdb, "stacks/" + id), {
+    uid: id,
+    name: name,
+  });
+}
+
+async function GetStack(Id: string) {
+  const dbRef = ref(FBdb);
+  try {
+    const snapshot = await get(child(dbRef, `stacks/${Id}`));
+    if (snapshot.exists()) {
+      return snapshot.val();
+    } else {
+      return { error: "No data available" };
+    }
+  } catch (error: any) {
+    throw new Error(`Failed to fetch stack: ${error.message}`);
+  }
+}
+
+async function DelStack(id: string) {
+  try {
+    await set(ref(FBdb, `stacks/${id}`), null);
+    return "Stack deleted successfully";
+  } catch (error: any) {
+    throw new Error(`Failed to delete stack: ${error.message}`);
+  }
+}
+//////////////////////////////////////////////////////////////////////////
+
+async function CreateLabel({id, name}: LabelT) {
+  set(ref(FBdb, "labels/" + id), {
+    uid: id,
+    name: name,
+  });
+}
+
+async function GetLabel(Id: string) {
+  const dbRef = ref(FBdb);
+  try {
+    const snapshot = await get(child(dbRef, `labels/${Id}`));
+    if (snapshot.exists()) {
+      return snapshot.val();
+    } else {
+      return { error: "No data available" };
+    }
+  } catch (error: any) {
+    throw new Error(`Failed to fetch label: ${error.message}`);
+  }
+}
+
+async function DelLabel(id: string) {
+  try {
+    await set(ref(FBdb, `labels/${id}`), null);
+    return "Label deleted successfully";
+  } catch (error: any) {
+    throw new Error(`Failed to delete label: ${error.message}`);
+  }
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////
 
 async function GetAllUsers() {
@@ -338,6 +403,35 @@ async function GetAllChats() {
   }
 }
 
+async function GetAllStacks() {
+  const dbRef = ref(FBdb, "stacks");
+  try {
+    const snapshot = await get(dbRef);
+    if (snapshot.exists()) {
+      return snapshot.val();
+    } else {
+      return { error: "No data available" };
+    }
+  } catch (error: any) {
+    throw new Error(`Failed to fetch stacks: ${error.message}`);
+  }
+}
+
+async function GetAllLabels() {
+  const dbRef = ref(FBdb, "labels");
+  try {
+    const snapshot = await get(dbRef);
+    if (snapshot.exists()) {
+      return snapshot.val();
+    } else {
+      return { error: "No data available" };
+    }
+  } catch (error: any) {
+    throw new Error(`Failed to fetch labels: ${error.message}`);
+  }
+}
+
+
 export {
   CreateUser,
   GetUser,
@@ -368,11 +462,21 @@ export {
   DelChat,
   UpdateChat,
 
+  CreateStack,
+  GetStack,
+  DelStack,
+
+  CreateLabel,
+  GetLabel,
+  DelLabel,
+
   GetAllUsers,
   GetAllBlogs,
   GetAllProjects,
   GetAllContents,
   GetAllMsgs,
   GetAllChats,
+  GetAllStacks,
+  GetAllLabels
   
 };
