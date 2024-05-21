@@ -1,6 +1,15 @@
 import { child, get, ref, set } from "firebase/database";
 import { FBdb } from "../init/firebase";
-import { BlogT, ChatT, ContentT, LabelT, MsgT, ProjectT, StackT, UserT } from "../types";
+import {
+  BlogT,
+  ChatT,
+  ContentT,
+  LabelT,
+  MsgT,
+  ProjectT,
+  StackT,
+  UserT,
+} from "../types";
 
 async function CreateUser({ id, name, email, pfp }: UserT) {
   set(ref(FBdb, "users/" + id), {
@@ -256,7 +265,7 @@ async function UpdateChat(id: string, data: ChatT) {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-async function CreateStack({id, name}: StackT) {
+async function CreateStack({ id, name }: StackT) {
   set(ref(FBdb, "stacks/" + id), {
     uid: id,
     name: name,
@@ -287,7 +296,7 @@ async function DelStack(id: string) {
 }
 //////////////////////////////////////////////////////////////////////////
 
-async function CreateLabel({id, name}: LabelT) {
+async function CreateLabel({ id, name }: LabelT) {
   set(ref(FBdb, "labels/" + id), {
     uid: id,
     name: name,
@@ -431,45 +440,36 @@ async function GetAllLabels() {
   }
 }
 
-
 export {
   CreateUser,
   GetUser,
   DelUser,
-
   CreateBlog,
   GetBlog,
   DelBlog,
   UpdateBlog,
-
   CreateProject,
   GetProject,
   DelProject,
   UpdateProject,
-
   CreateContent,
   GetContent,
   DelContent,
   UpdateContent,
-
   CreateMsg,
   GetMsg,
   DelMsg,
   UpdateMsg,
-  
   CreateChat,
   GetChat,
   DelChat,
   UpdateChat,
-
   CreateStack,
   GetStack,
   DelStack,
-
   CreateLabel,
   GetLabel,
   DelLabel,
-
   GetAllUsers,
   GetAllBlogs,
   GetAllProjects,
@@ -477,6 +477,5 @@ export {
   GetAllMsgs,
   GetAllChats,
   GetAllStacks,
-  GetAllLabels
-  
+  GetAllLabels,
 };
