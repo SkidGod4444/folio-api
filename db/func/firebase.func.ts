@@ -252,6 +252,92 @@ async function UpdateChat(id: string, data: ChatT) {
   }
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////
+
+async function GetAllUsers() {
+  const dbRef = ref(FBdb, "users");
+  try {
+    const snapshot = await get(dbRef);
+    if (snapshot.exists()) {
+      return snapshot.val();
+    } else {
+      return { error: "No data available" };
+    }
+  } catch (error: any) {
+    throw new Error(`Failed to fetch users: ${error.message}`);
+  }
+}
+
+async function GetAllBlogs() {
+  const dbRef = ref(FBdb, "blogs");
+  try {
+    const snapshot = await get(dbRef);
+    if (snapshot.exists()) {
+      return snapshot.val();
+    } else {
+      return { error: "No data available" };
+    }
+  } catch (error: any) {
+    throw new Error(`Failed to fetch blogs: ${error.message}`);
+  }
+}
+
+async function GetAllProjects() {
+  const dbRef = ref(FBdb, "projects");
+  try {
+    const snapshot = await get(dbRef);
+    if (snapshot.exists()) {
+      return snapshot.val();
+    } else {
+      return { error: "No data available" };
+    }
+  } catch (error: any) {
+    throw new Error(`Failed to fetch projects: ${error.message}`);
+  }
+}
+
+async function GetAllContents() {
+  const dbRef = ref(FBdb, "contents");
+  try {
+    const snapshot = await get(dbRef);
+    if (snapshot.exists()) {
+      return snapshot.val();
+    } else {
+      return { error: "No data available" };
+    }
+  } catch (error: any) {
+    throw new Error(`Failed to fetch contents: ${error.message}`);
+  }
+}
+
+async function GetAllMsgs() {
+  const dbRef = ref(FBdb, "msgs");
+  try {
+    const snapshot = await get(dbRef);
+    if (snapshot.exists()) {
+      return snapshot.val();
+    } else {
+      return { error: "No data available" };
+    }
+  } catch (error: any) {
+    throw new Error(`Failed to fetch msgs: ${error.message}`);
+  }
+}
+
+async function GetAllChats() {
+  const dbRef = ref(FBdb, "chats");
+  try {
+    const snapshot = await get(dbRef);
+    if (snapshot.exists()) {
+      return snapshot.val();
+    } else {
+      return { error: "No data available" };
+    }
+  } catch (error: any) {
+    throw new Error(`Failed to fetch chats: ${error.message}`);
+  }
+}
+
 export {
   CreateUser,
   GetUser,
@@ -281,4 +367,12 @@ export {
   GetChat,
   DelChat,
   UpdateChat,
+
+  GetAllUsers,
+  GetAllBlogs,
+  GetAllProjects,
+  GetAllContents,
+  GetAllMsgs,
+  GetAllChats,
+  
 };
