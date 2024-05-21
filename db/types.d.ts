@@ -3,8 +3,6 @@ export type UserT = {
     name: string;
     pfp: string;
     email: string;
-    Xlogin: boolean;
-    Gitlogin: boolean;
     msgs?: string[];
 };
 
@@ -20,7 +18,7 @@ export type BlogT = {
     labels: string[];
 };
 
-export type ProductT = {
+export type ProjectT = {
     id: string;
     name: string;
     thumbnail?: string;
@@ -67,8 +65,17 @@ export type MsgT = {
     id: string;
     from: string;
     to: string;
-    message: string[];
+    message: string;
+    chatId: string;
     date?: string;
+};
+
+export type ChatT = {
+    id: string;
+    user1: string;
+    user2: string;
+    User1Msgs: string[];
+    User2Msgs: string[];
 };
 
 export type StackT = {

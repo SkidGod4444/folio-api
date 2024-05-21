@@ -1,10 +1,9 @@
-
-import { initializeApp, getApp } from "firebase/app";
-import { getStorage } from "firebase/storage";
+import { initializeApp } from "firebase/app";
+import { getDatabase } from "firebase/database";
 
 
 // Get environment variables
-const apiKey = process.env.FB_APPID;
+const apiKey = process.env.FB_APPKEY;
 const authDomain = process.env.FB_AUTHDOMAIN!;
 const databaseURL = process.env.FB_DBURL!;
 const projectId = process.env.FB_PROJECTID!;
@@ -13,21 +12,21 @@ const messagingSenderId = process.env.FB_MSGSENDER!;
 const appId = process.env.FB_APPID!;
 const measurementId = process.env.FB_MEASUREID!;
 
-const fbInit = {
-    apiKey,
-    authDomain,
-    databaseURL,
-    projectId,
-    storageBucket,
-    messagingSenderId,
-    appId,
-    measurementId
+
+const firebaseConfig = {
+  apiKey,
+  authDomain,
+  databaseURL,
+  projectId,
+  storageBucket,
+  messagingSenderId,
+  appId,
+  measurementId,
 };
-console.log(apiKey, authDomain, databaseURL, projectId, storageBucket, messagingSenderId, appId, measurementId)
+
 // Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const FBdb = getDatabase(app);
 
-const fb = initializeApp(fbInit);
-const firebaseApp = getApp();
-const storage1 = getStorage(firebaseApp);
+export { FBdb };
 
-export { firebaseApp, storage1 }
