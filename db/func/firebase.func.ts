@@ -45,13 +45,14 @@ async function DelUser(id: string) {
 
 ////////////////////////////////////////////////////////////////////
 
-async function CreateBlog({ id, title, content, source, labels }: BlogT) {
+async function CreateBlog({ id, title, content, source, labels, thumbnail }: BlogT) {
   set(ref(FBdb, "blogs/" + id), {
     uid: id,
     title: title,
     content: content,
     source: source,
     labels: labels,
+    thumbnail: thumbnail,
   });
 }
 
