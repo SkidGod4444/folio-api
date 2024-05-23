@@ -4,14 +4,20 @@ export async function GET() {
   try {
     const res = await GetAllProjects();
     return new Response(JSON.stringify(res), {
-      headers: {
+       headers: {
         "content-type": "application/json",
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0",
       },
     });
   } catch (error: any) {
     return new Response(JSON.stringify({ error: error.message }), {
-      headers: {
+       headers: {
         "content-type": "application/json",
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0",
       },
     });
   }

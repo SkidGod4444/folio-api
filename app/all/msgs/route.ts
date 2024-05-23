@@ -6,12 +6,18 @@ export async function GET() {
     return new Response(JSON.stringify(res), {
       headers: {
         "content-type": "application/json",
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0",
       },
     });
   } catch (error: any) {
     return new Response(JSON.stringify({ error: error.message }), {
       headers: {
         "content-type": "application/json",
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0",
       },
     });
   }
