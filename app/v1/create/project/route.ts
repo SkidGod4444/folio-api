@@ -4,8 +4,8 @@ export const dynamic = "force-dynamic";
 export async function POST(req: Request) {
   const body = await req.json();
   try {
-    const { id, name, stacks, labels } = body;
-    await CreateProject({ id, name, stacks, labels });
+    const { id, title, desc, img, iconsList, stacks, labels } = body;
+    await CreateProject({ id, title, desc, img, iconsList, stacks, labels });
     return new Response("Project created successfully", {
       headers: {
         "content-type": "application/json",

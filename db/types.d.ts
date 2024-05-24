@@ -20,11 +20,12 @@ export type BlogT = {
 
 export type ProjectT = {
     id: string;
-    name: string;
-    thumbnail?: string;
+    title: string;
+    desc: string;
+    img?: string;
     date?: string;
     archived?: boolean;
-    source?: string;
+    iconsList?: string;
     stacks: string[];
     labels: string[];
 };

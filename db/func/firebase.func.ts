@@ -90,10 +90,13 @@ async function UpdateBlog(id: string, data: BlogT) {
 
 ////////////////////////////////////////////////////////////////
 
-async function CreateProject({ id, name, stacks, labels }: ProjectT) {
+async function CreateProject({ id, title, desc, img, iconsList, stacks, labels }: ProjectT) {
   set(ref(FBdb, "projects/" + id), {
     uid: id,
-    name: name,
+    title: title,
+    desc: desc,
+    img: img,
+    iconsList: iconsList,
     stacks: stacks,
     labels: labels,
   });
