@@ -95,3 +95,11 @@ export type LabelT = {
     contents?: string[];
 };
 
+export type TestimonialT = {
+    id: string;
+    title: string;
+    quote: string;
+    date?: string;
+    pic?: string;
+    name: string;
+};

@@ -8,6 +8,7 @@ import {
   MsgT,
   ProjectT,
   StackT,
+  TestimonialT,
   UserT,
 } from "../types";
 
@@ -330,6 +331,42 @@ async function DelLabel(id: string) {
   }
 }
 
+////////////////////////////////////////////////////////////////////////////////////////
+
+async function CreateTestimonial({ id, title, quote, name, pic }: TestimonialT) {
+  set(ref(FBdb, "testimonials/" + id), {
+    uid: id,
+    title: title,
+    quote: quote,
+    name: name,
+    date: new Date().toISOString(),
+    pic: pic,
+  });
+}
+
+async function GetTestimonial(Id: string) {
+  const dbRef = ref(FBdb);
+  try {
+    const snapshot = await get(child(dbRef, `testimonials/${Id}`));
+    if (snapshot.exists()) {
+      return snapshot.val();
+    } else {
+      return { error: "No data available" };
+    }
+  } catch (error: any) {
+    throw new Error(`Failed to fetch testimonial: ${error.message}`);
+  }
+}
+
+async function DelTestimonial(id: string) {
+  try {
+    await set(ref(FBdb, `testimonials/${id}`), null);
+    return "Testimonial deleted successfully";
+  } catch (error: any) {
+    throw new Error(`Failed to delete testimonial: ${error.message}`);
+  }
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////
 
 async function GetAllUsers() {
@@ -444,6 +481,20 @@ async function GetAllLabels() {
   }
 }
 
+async function GetAllTestimonials() {
+  const dbRef = ref(FBdb, "testimonials");
+  try {
+    const snapshot = await get(dbRef);
+    if (snapshot.exists()) {
+      return snapshot.val();
+    } else {
+      return { error: "No data available" };
+    }
+  } catch (error: any) {
+    throw new Error(`Failed to fetch testimonials: ${error.message}`);
+  }
+}
+
 export {
   CreateUser,
   GetUser,
@@ -482,4 +533,8 @@ export {
   GetAllChats,
   GetAllStacks,
   GetAllLabels,
+  CreateTestimonial,
+  GetTestimonial,
+  DelTestimonial,
+  GetAllTestimonials,
 };
