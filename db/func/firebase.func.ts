@@ -1,4 +1,4 @@
-import { child, get, ref, set } from "firebase/database";
+import { child, get, ref, set, update } from "firebase/database";
 import { FBdb } from "../init/firebase";
 import {
   BlogT,
@@ -46,14 +46,17 @@ async function DelUser(id: string) {
 
 ////////////////////////////////////////////////////////////////////
 
-async function CreateBlog({ id, title, content, source, labels, thumbnail }: BlogT) {
+async function CreateBlog({ id, title, content, img, icon, archived, reads, divs }: BlogT) {
   set(ref(FBdb, "blogs/" + id), {
     uid: id,
     title: title,
     content: content,
-    source: source,
-    labels: labels,
-    thumbnail: thumbnail,
+    dateNtime: new Date().toISOString(),
+    img: img,
+    icon: icon,
+    reads: reads,
+    isArchived: archived,
+    divs: divs,
   });
 }
 

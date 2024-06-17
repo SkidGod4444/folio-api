@@ -6,16 +6,31 @@ export type UserT = {
     msgs?: string[];
 };
 
+export type DivsT = {
+    serial: number;
+    topic: string;
+    content?: string;
+    img?: string;
+    imgTop: boolean;
+    links?: { name: string; url: string }[];
+    linksTop: boolean;
+    pointers?:{
+        title?: string;
+        serial: number;
+        point: { serial: number; content: string }[];
+    }[];
+    pointersTop: boolean;
+}
 export type BlogT = {
     id: string;
     title: string;
     content: string;
-    thumbnail?: string;
-    date?: string;
+    img?: string;
+    icon?: string;
+    dateNtime?: string;
     archived?: boolean;
     reads?: number;
-    source: string;
-    labels: string[];
+    divs: DivsT[];
 };
 
 export type ProjectT = {
